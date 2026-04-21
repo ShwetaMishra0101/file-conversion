@@ -1,10 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import ImageConverter from './Component/ImageConverter';
 
 function App() {
   return (
     <div className="App">
-   <h1>hello world</h1>
+   <ImageConverter />
     </div>
   );
 }
