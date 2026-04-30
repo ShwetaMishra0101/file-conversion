@@ -108,16 +108,16 @@ const MediaCard = ({ file, onConvert, onDelete, onRefresh }) => {
         >
           {file.originalName}
         </p>
-        <div className="flex justify-between text-xs text-zinc-400 mb-3">
+        <div className="flex justify-between text-[12px] md:text-[14px] !font-[400] text-zinc-400 mb-3 flex-wrap">
           <span>{fmtSize(file.size)}</span>
           <span>{fmtDate(file.createdAt)}</span>
         </div>
 
         {/* Actions */}
-        <div className="flex gap-1.5 items-center">
+        <div className="flex gap-1.5 items-center flex-wrap">
           <button
             onClick={() => isPreviewable ? setShowPreview(true) : window.open(fileUrl, '_blank')}
-            className="flex-1 py-1.5 border border-zinc-200 rounded-lg text-xs text-blue-600 hover:bg-zinc-50 transition-colors"
+            className="flex-1 py-1.5 border border-blue-600 rounded-[8px] md:px-[4px] px-[8px] text-[12px] md:text-[14px] text-blue-600 hover:bg-blue-50 transition-colors"
           >
             View
           </button>

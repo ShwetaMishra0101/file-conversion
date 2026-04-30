@@ -5,7 +5,7 @@ const Pagination = ({ page, totalPages, total, onPage }) => {
     const pages = Array.from({ length: end - start + 1 }, (_, i) => start + i);
   
     return (
-      <div className="fixed bottom-0 left-0 right-0 flex items-center justify-center gap-2 py-6 bg-white border-t border-zinc-200 z-50">
+      <div className="fixed bottom-0 left-0 right-0 flex items-center justify-center gap-2 md:py-6 py-4 bg-white border-t border-zinc-200 z-50">
         <button
           onClick={() => onPage(page - 1)}
           disabled={page <= 1}
