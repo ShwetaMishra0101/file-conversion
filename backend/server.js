@@ -25,7 +25,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-app.use('/uploads', express.static(path.join(__dirname, 'src/uploads')));
+app.use(
+  '/uploads',
+  express.static(path.join(__dirname, 'src/uploads'), {
+    setHeaders: (res) => {
+      res.setHeader('Content-Disposition', 'inline');
+      res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+    },
+  })
+);
 
 // Routes
 app.use('/api/media', mediaRoutes);

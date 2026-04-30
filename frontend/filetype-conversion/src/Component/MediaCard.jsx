@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import axios from 'axios';
+import PreviewModal from './PreviewModal';
 
 const fmtSize = (bytes) => {
 
@@ -45,13 +47,15 @@ const IconBtn = ({ title, onClick, children, danger }) => (
 );
 
 const MediaCard = ({ file, onConvert, onDelete, onRefresh }) => {
-  const imgSrc = isImage(file.mimeType)
-    ? `http://localhost:7001/uploads/${file.storedName}`
-    : null;
+  const [showPreview, setShowPreview] = useState(false);
+
+  const fileUrl = `http://localhost:7001/uploads/${file.storedName}`;
+  const imgSrc = isImage(file.mimeType) ? fileUrl : null;
+  const isVideo = file.mimeType === 'video/mp4';
+  const isPreviewable = imgSrc || isVideo;
 
   const handleCopy = () => {
-    const url = `http://localhost:7001/uploads/${file.storedName}`;
-    navigator.clipboard.writeText(url);
+    navigator.clipboard.writeText(fileUrl);
   };
 
   const handleDownload = async () => {
@@ -74,6 +78,7 @@ const MediaCard = ({ file, onConvert, onDelete, onRefresh }) => {
   };
 
   return (
+    <>
     <div className="bg-white border border-zinc-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
       {/* Thumbnail */}
       <div className="h-40 bg-zinc-100 flex items-center justify-center overflow-hidden">
@@ -111,7 +116,7 @@ const MediaCard = ({ file, onConvert, onDelete, onRefresh }) => {
         {/* Actions */}
         <div className="flex gap-1.5 items-center">
           <button
-            onClick={handleCopy}
+            onClick={() => isPreviewable ? setShowPreview(true) : window.open(fileUrl, '_blank')}
             className="flex-1 py-1.5 border border-zinc-200 rounded-lg text-xs text-blue-600 hover:bg-zinc-50 transition-colors"
           >
             View
@@ -146,6 +151,18 @@ const MediaCard = ({ file, onConvert, onDelete, onRefresh }) => {
         </div>
       </div>
     </div>
+
+    {showPreview && (
+      <PreviewModal
+        file={file}
+        fileUrl={fileUrl}
+        imgSrc={imgSrc}
+        isVideo={isVideo}
+        onClose={() => setShowPreview(false)}
+        onCopy={handleCopy}
+      />
+    )}
+    </>
   );
 };
 
