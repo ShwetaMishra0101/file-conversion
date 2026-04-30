@@ -3,9 +3,10 @@ const dotenv = require("dotenv");
 dotenv.config(); // ✅ Must be first before anything else
 
 const cors = require('cors');
+const path      = require('path');
 const connectDB = require('./src/config/db');
 
-const imageRoutes = require('./src/routes/imageRoutes')
+const mediaRoutes = require('./src/routes/imageRoutes')
 const fs = require('fs');
 
 connectDB();
@@ -24,7 +25,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-app.use('/api/image', imageRoutes);
+app.use('/uploads', express.static(path.join(__dirname, 'src/uploads')));
+
+// Routes
+app.use('/api/media', mediaRoutes);
 
 app.get('/', (req, res) => {
     console.log("checking");
