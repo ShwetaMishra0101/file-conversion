@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getMedia, deleteMedia, convertMedia } from '../Component/Api/mediaApi';
-import MediaGrid from '../Component/MediaGrid';
-import Toolbar from '../Component/Toolbar';
-import Pagination from '../Component/Pagination';
-import UploadModal from '../Component/UploadModal';
+import { getMedia, deleteMedia, convertMedia } from '../Component/Common/api/mediaApi';
+import MediaGrid from '../Component/MediaLibrary/MediaGrid';
+import Toolbar from '../Component/MediaLibrary/Toolbar';
+import Pagination from '../Component/MediaLibrary/Pagination';
+import UploadModal from '../Component/MediaLibrary/UploadModal';
 
 export default function MediaLibrary() {
   const [files, setFiles] = useState([]);

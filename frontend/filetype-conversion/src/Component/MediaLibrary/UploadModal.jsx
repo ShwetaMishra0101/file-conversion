@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { uploadMedia } from '../Component/Api/mediaApi';
+import { uploadMedia } from '../Common/api/mediaApi';
 
 const API_ORIGIN = 'http://localhost:7001';
 
